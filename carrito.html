@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Carrito de Compra</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>Carrito de Compra</h1>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+            </tr>
+          </thead>
+          <tbody id="cart-items">
+          </tbody>
+        </table>
+        <h3>Total: <span id="total-price"></span></h3>
+        <button id="clear-cart" class="btn btn-danger">Vaciar Carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Obtiene los productos del carrito de compra desde el LocalStorage
+      var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+      // Genera las filas de la tabla con los productos del carrito
+      function generateCartItems() {
+        var cartItemsContainer = $("#cart-items");
+        var totalPrice = 0;
+
+        for (var i = 0; i < cartItems.length; i++) {
+          var cartItem = cartItems[i];
+
+          var row = $("<tr></tr>");
+          var productName = $("<td></td>").text(cartItem.name);
+          var productPrice = $("<td></td>").text("$" + cartItem.price);
+
+          row.append(productName, productPrice);
+          cartItemsContainer.append(row);
+
+          totalPrice += parseFloat(cartItem.price);
+        }
+
+        $("#total-price").text("$" + totalPrice.toFixed(2));
+      }
+
+      // Genera los elementos del carrito al cargar la página
+      generateCartItems();
+
+      // Vacía el carrito de compra
+      $("#clear-cart").click(function() {
+        localStorage.removeItem("cartItems");
+        $("#cart-items").empty();
+        $("#total-price").text("$0.00");
+      });
+    });
+  </script>
+</body>
+
+</html>
