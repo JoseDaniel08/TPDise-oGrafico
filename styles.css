@@ -164,6 +164,11 @@
   border: solid 2px #6affa5;
 }
 
+#cart-items, thead tr, thead th {
+  background: linear-gradient(0deg, rgba(30,34,128,1) 10%, rgba(63,66,246,1) 35%, rgba(30,86,203,1) 57%, rgba(0,105,164,1) 70%, rgba(120,176,242,1) 100%);
+  color: ghostwhite;
+}
+
 .cart-container .btn-primary:hover{
   background-color: #6affa5;
   color:  #222222
