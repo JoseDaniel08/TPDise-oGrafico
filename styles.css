@@ -254,3 +254,8 @@ body {
     padding-right: 5px;
   }
 }
+  #cart-items,
+  thead tr,
+  thead th {
+    background-color: white;
+  }
